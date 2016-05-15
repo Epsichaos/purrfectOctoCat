@@ -1,4 +1,4 @@
-app.controller("TaskCtrl", function($scope, $ionicPopup, $cordovaSQLite) {
+app.controller("TaskCtrl", function($scope, $rootScope,$ionicPopup, $cordovaSQLite) {
     $scope.init = function() {
         $scope.newTask = {
             'isNewTask': false,
@@ -19,11 +19,12 @@ app.controller("TaskCtrl", function($scope, $ionicPopup, $cordovaSQLite) {
     }
 
     $scope.taskValidation = function(newTask) {
-        alert('beforeQuery');
+        //alert('beforeQuery');
         var query = "INSERT INTO task (taskName, categoryName, date, durationHours, durationMinutes) VALUES(?,?,?,?,?)"
         $cordovaSQLite.execute(dbApp,query,[newTask.taskName,newTask.categoryName, newTask.date,newTask.durationHours, newTask.durationMinutes]).then(function(result) {
             alert("INSERT ID -> " + result.insertId);
-            this.init();
+            // emit event to reload list page
+            $rootScope.$emit("insertTaskEvent", {});
         }, function(error) {
             alert(error);
         });

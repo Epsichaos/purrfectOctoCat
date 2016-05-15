@@ -1,11 +1,21 @@
-app.controller("ListCtrl", function($scope, $cordovaSQLite, $ionicPopup) {
+app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPopup) {
+
+    // catch insert event and reload page
+    $rootScope.$on('insertTaskEvent', function() {
+            //debug
+            //alert('insertTaskEvent');
+            $scope.init();
+    });
+
     $scope.init = function() {
         $scope.collection = [];
         collection = [];
         if(window.cordova) {
+            //alert('lal');
             var query = "SELECT * FROM task ORDER BY idTask DESC";
             //alert('select called');
             $cordovaSQLite.execute(dbApp,query).then(function(result) {
+                //alert('lol');
                 if(result.rows.length > 0) {
                     /*
                     for(var i=0; i<result.row.length; i++) {
@@ -14,7 +24,7 @@ app.controller("ListCtrl", function($scope, $cordovaSQLite, $ionicPopup) {
                     }
                     //alert(obj.firstname);
                     */
-                    alert(result.rows.length)
+                    //alert(result.rows.length);
                     for(var i = 0; i<result.rows.length; i++) {
                         obj = {
                             'idTask': result.rows.item(i).idTask,
@@ -63,4 +73,5 @@ app.controller("ListCtrl", function($scope, $cordovaSQLite, $ionicPopup) {
            }
         });
     }
+
 })

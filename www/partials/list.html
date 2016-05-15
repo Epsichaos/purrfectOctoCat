@@ -19,7 +19,7 @@
                     <div class="col">
                         <h2>{{item.taskName}}</h2>
                         <p>{{item.categoryName}}</p>
-                        <!--<p>{{item.beginDate}} - {{item.endDate}}</p>-->
+                        <p>{{item.date}} - {{item.durationHours}}:{{item.durationMinutes}}</p>
                     </div>
                     <div class="col">
                         <button class="button button-block button-assertive" ng-click="deleteItem({{item.idTask}})">Delete</button>

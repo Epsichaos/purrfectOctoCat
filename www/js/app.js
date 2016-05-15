@@ -24,12 +24,12 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
         //alert('first load');
         dbApp = $cordovaSQLite.openDB({name:'my.purrfect.db', location:'default'});
         //$cordovaSQLite.execute(dbApp, "DROP TABLE user");
-        $cordovaSQLite.execute(dbApp, "DROP TABLE task");
+        //$cordovaSQLite.execute(dbApp, "DROP TABLE task");
         $cordovaSQLite.execute(dbApp, "CREATE TABLE IF NOT EXISTS user (id integer primary key, firstname text, lastname text, nickname text, email text)");
         //$cordovaSQLite.execute(dbApp, "CREATE TABLE IF NOT EXISTS category (idCategory INTEGER PRIMARY KEY, categoryName TEXT)");
         //$cordovaSQLite.execute(dbApp, "CREATE TABLE IF NOT EXISTS task (idTask INTEGER PRIMARY KEY, idCategory INTEGER, taskName TEXT, beginDate DATE, endDate DATE, FOREIGN KEY (idCategory) REFERENCES category (idCategory))");
         $cordovaSQLite.execute(dbApp, "CREATE TABLE IF NOT EXISTS task (idTask INTEGER PRIMARY KEY, categoryName TEXT, taskName TEXT, date DATE, durationHours INTEGER, durationMinutes INTEGER)");
-
+        //alert('table created');
         /*
         var query = "INSERT INTO task (categoryName, taskName, beginDate, endDate) VALUES (?,?,?,?)";
         $cordovaSQLite.execute(dbApp,query,["Movie","Matrix 1", "11/05/2016T17:23:00.000Z", "12/05/2016T14:23:00.000Z"]).then(function(result) {
