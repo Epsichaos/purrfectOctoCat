@@ -1,0 +1,63 @@
+<ion-view view-title="Settings">
+    <ion-content class="padding">
+        <!-- MODIFICATION MODE -->
+        <form novalidate ng-show="userModifications()" class="simple-form" ng-init="init()">
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">First Name</span>
+                <input type="text" ng-model="user.firstname" placeholder="John" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" ng-model="user.lastname" placeholder="Doe" required>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Nickname</span>
+                <input type="text" ng-model="user.nickname" placeholder="Doe" required>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="user.email" placeholder="john.doe@example.com" required>
+              </label>
+              <br>
+              <button class="button button-block button-balanced" ng-click="formValidation(user)">
+                  Save settings
+              </button>
+            </div>
+        </form>
+        <!-- NO MODIFICATION MODE -->
+        <div ng-hide="userModifications()" class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">First Name</span>
+            <p style="line-height:5px;"><br></p>
+            <p>{{obj.firstname}}</p>
+            <p style="line-height:5px;"><br></p>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Last Name</span>
+            <p style="line-height:5px;"><br></p>
+            <p>{{obj.lastname}}</p>
+            <p style="line-height:5px;"><br></p>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Nickname</span>
+            <p style="line-height:5px;"><br></p>
+            <p>{{obj.nickname}}</p>
+            <p style="line-height:5px;"><br></p>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Email</span>
+            <p style="line-height:5px;"><br></p>
+            <p>{{obj.email}}</p>
+            <p style="line-height:5px;"><br></p>
+          </label>
+          <br>
+          <button class="button button-block button-balanced" ng-click="changeModify(true)">
+              Change your informations
+          </button>
+        </div>
+        <button class="button button-block button-assertive" ng-click="deleteHistory()">
+            Delete history
+        </button>
+    </ion-content>
+</ion-view>

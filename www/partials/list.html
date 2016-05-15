@@ -1,0 +1,39 @@
+<ion-view view-title="List">
+    <ion-content class="padding">
+        <div class="row row-center center">
+            <div class="col">
+                <label class="item item-input item-stacked-label">
+                    <!--<span class="input-label">New category name</span>-->
+                    <input type="text" ng-model="search" placeholder="Research">
+                </label>
+            </div>
+            <div class="col">
+                <button class="button button-energized">
+                    Filter by research
+                </button disabled>
+            </div>
+        </div>
+        <div class="list card" ng-init="init()">
+            <div class="item item-text-wrap" ng-repeat="item in collection | filter:search">
+                <div class="row row-center">
+                    <div class="col">
+                        <h2>{{item.taskName}}</h2>
+                        <p>{{item.categoryName}}</p>
+                        <!--<p>{{item.beginDate}} - {{item.endDate}}</p>-->
+                    </div>
+                    <div class="col">
+                        <button class="button button-block button-assertive" ng-click="deleteItem({{item.idTask}})">Delete</button>
+                        <button class="button button-block button-positive">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <ion-item collection-repeat="item in items">
+            <div class="row">
+                {{item.name}}
+            </div>
+        </ion-item>
+        -->
+    </ion-content>
+</ion-view>

@@ -1,0 +1,90 @@
+<ion-view view-title="New Task">
+    <ion-content class="padding">
+        <div class="list" ng-init="init()">
+            {{newTask}}
+            <!-- New category ? -->
+            <h3 class="center"><i class="icon ion-compose"></i> Category</h3>
+            <br>
+            <!-- Create new category  -->
+            <label ng-show=newTask.isNewCategory class="item item-input item-stacked-label">
+              <span class="input-label">New category name</span>
+              <input type="text" ng-model="newTask.newCategoryName" placeholder="Category name">
+            </label>
+            <!-- Use existing category ? -->
+          <label ng-hide=newTask.isNewCategory class="item item-input item-select">
+            <div class="input-label">
+              Category
+            </div>
+            <select ng-model="newTask.categoryName">
+                <option>Book</option>
+                <option>Movie</option>
+                <option>Cooking</option>
+                <option>Shower/Bath</option>
+                <option>Work</option>
+            </select>
+          </label>
+         <ion-checkbox ng-model="newTask.isNewCategory">Create new category</ion-checkbox>
+            <br>
+            <h3 class="center"><i class="icon ion-briefcase"></i> Task</h3>
+            <br>
+            <!-- use exisiting taskname -->
+            <label ng-hide=newTask.isNewTask class="item item-input item-select">
+              <div class="input-label">
+                Task name
+              </div>
+              <select ng-model="newTask.taskName">
+                  <option>Matrix 1</option>
+                  <option>The lord of the rings 1</option>
+              </select>
+            </label>
+            <!-- Create new task name -->
+            <label ng-show=newTask.isNewTask class="item item-input item-stacked-label">
+              <span class="input-label">Task name</span>
+              <input type="text" ng-model="newTask.newTaskName" placeholder="Task name">
+            </label>
+            <!-- New task ? -->
+            <ion-checkbox ng-model="newTask.isNewTask">Create new task name</ion-checkbox>
+            <br>
+            <h3 class="center" ng-show=newTask.isTimePeriod><i class="icon ion-calendar"></i> Date</h3>
+            <h3 class="center" ng-hide=newTask.isTimePeriod><i class="icon ion-calendar"></i> Duration</h3>
+            <br>
+            <!-- Begin date -->
+            <label class="item item-input item-stacked-label" ng-show=newTask.isTimePeriod>
+              <span class="input-label">Begin date</span>
+              <input type="date" ng-model="newTask.beginDate" placeholder="dd-mm-aaaa">
+            </label>
+            <label class="item item-input item-stacked-label" ng-show=newTask.isTimePeriod>
+              <span class="input-label">Begin hour</span>
+              <input type="time" ng-model="newTask.beginHour" placeholder="hh:mm">
+            </label>
+            <!-- End date -->
+            <label class="item item-input item-stacked-label" ng-show=newTask.isTimePeriod>
+              <span class="input-label">End date</span>
+              <input type="date"  ng-model="newTask.endDate" placeholder="dd-mm-aaaa">
+            </label>
+            <label class="item item-input item-stacked-label" ng-show=newTask.isTimePeriod>
+              <span class="input-label">End hour</span>
+              <input type="time"  ng-model="newTask.endHour" placeholder="hh:mm">
+            </label>
+            <!-- Duration -->
+            <label class="item item-input item-stacked-label" ng-hide=newTask.isTimePeriod>
+              <span class="input-label">Date</span>
+              <input type="date" ng-model="newTask.date">
+            </label>
+            <label class="item item-input item-stacked-label" ng-hide=newTask.isTimePeriod>
+              <span class="input-label">Duration (hours)</span>
+              <input type="number" ng-model="newTask.durationHours">
+            </label>
+            <label class="item item-input item-stacked-label" ng-hide=newTask.isTimePeriod>
+              <span class="input-label">Duration (minutes)</span>
+              <input type="number" ng-model="newTask.durationMinutes">
+            </label>
+            <!-- <ion-checkbox ng-model="newTask.isTimePeriod">Time period</ion-checkbox>-->
+            <br>
+            <!-- Submit button -->
+            <button class="button button-block button-balanced" type="submit" ng-click="taskValidation(newTask)">
+                Add new task
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
