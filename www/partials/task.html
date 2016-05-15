@@ -1,14 +1,15 @@
 <ion-view view-title="New Task">
     <ion-content class="padding">
         <div class="list" ng-init="init()">
-            {{newTask}}
             <!-- New category ? -->
             <h3 class="center"><i class="icon ion-compose"></i> Category</h3>
             <br>
             <!-- Create new category  -->
             <label ng-show=newTask.isNewCategory class="item item-input item-stacked-label">
               <span class="input-label">New category name</span>
-              <input type="text" ng-model="newTask.newCategoryName" placeholder="Category name">
+
+              <!--<input type="text" ng-model="newTask.newCategoryName" placeholder="Category name">-->
+              <input type="text" ng-model="newTask.categoryName" placeholder="Category name">
             </label>
             <!-- Use existing category ? -->
           <label ng-hide=newTask.isNewCategory class="item item-input item-select">
@@ -16,11 +17,7 @@
               Category
             </div>
             <select ng-model="newTask.categoryName">
-                <option>Book</option>
-                <option>Movie</option>
-                <option>Cooking</option>
-                <option>Shower/Bath</option>
-                <option>Work</option>
+                <option ng-repeat="item in categoryCollection">{{item.categoryName}}</option>
             </select>
           </label>
          <ion-checkbox ng-model="newTask.isNewCategory">Create new category</ion-checkbox>
@@ -33,14 +30,15 @@
                 Task name
               </div>
               <select ng-model="newTask.taskName">
-                  <option>Matrix 1</option>
-                  <option>The lord of the rings 1</option>
+                  <!-- | filter: {{item.category}}==newTask.categoryName -->
+                  <option ng-repeat="item in taskCollection">{{item.taskName}}</option>
               </select>
             </label>
             <!-- Create new task name -->
             <label ng-show=newTask.isNewTask class="item item-input item-stacked-label">
               <span class="input-label">Task name</span>
-              <input type="text" ng-model="newTask.newTaskName" placeholder="Task name">
+              <!-- <input type="text" ng-model="newTask.newTaskName" placeholder="Task name"> -->
+              <input type="text" ng-model="newTask.taskName" placeholder="Task name">
             </label>
             <!-- New task ? -->
             <ion-checkbox ng-model="newTask.isNewTask">Create new task name</ion-checkbox>

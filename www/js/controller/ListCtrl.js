@@ -26,11 +26,21 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
                     */
                     //alert(result.rows.length);
                     for(var i = 0; i<result.rows.length; i++) {
+                        d = new Date(result.rows.item(i).date);
+                        day = d.getDate();
+                        month = d.getMonth();
+                        year = d.getFullYear();
+                        if(day<10) {
+                            day = '0'+day;
+                        }
+                        if(month<10) {
+                            month = '0'+month;
+                        }
                         obj = {
                             'idTask': result.rows.item(i).idTask,
                             'categoryName': result.rows.item(i).categoryName,
                             'taskName': result.rows.item(i).taskName,
-                            'date': result.rows.item(i).date,
+                            'date': day + '/' + month + '/' + year,
                             'durationHours': result.rows.item(i).durationHours,
                             'durationMinutes': result.rows.item(i).durationMinutes
                         };
