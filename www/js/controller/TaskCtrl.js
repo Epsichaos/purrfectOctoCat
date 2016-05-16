@@ -1,4 +1,8 @@
 app.controller("TaskCtrl", function($scope, $rootScope,$ionicPopup, $cordovaSQLite) {
+    $rootScope.$on('resetDatabase', function() {
+            $scope.init();
+    });
+    
     $scope.init = function() {
         $scope.newTask = {
             'isNewTask': false,

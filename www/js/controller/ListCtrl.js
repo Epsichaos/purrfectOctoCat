@@ -7,6 +7,10 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
             $scope.init();
     });
 
+    $rootScope.$on('resetDatabase', function() {
+            $scope.init();
+    });
+
     $scope.init = function() {
         $scope.collection = [];
         collection = [];
@@ -75,7 +79,16 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
         confirmPopup.then(function(res) {
             // if OK
            if(res) {
-              alert(id);
+               var query = "DELETE FROM task WHERE idTask=?";
+               $cordovaSQLite.execute(dbApp, query, [id]).then(function(result) {
+                   var alertPopup = $ionicPopup.alert({
+                       title: 'Delete completed',
+                       template: 'Item has been deleted'
+                   });
+                   $scope.init();
+               }, function(error) {
+                  alert('error' + error.message);
+              });
            }
            // not OK
            else {
