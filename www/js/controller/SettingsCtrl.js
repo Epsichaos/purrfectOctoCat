@@ -117,7 +117,7 @@ app.controller("SettingsCtrl", function($scope, $cordovaSQLite, $ionicPlatform, 
                                 title: 'Delete completed',
                                 template: 'All database has been deleted'
                             });
-                            $rootScope.$emit("resetDatabase", {});
+                            $rootScope.$emit("reset", {});
                         }, function(error) {
                            alert('error' + error);
                        });

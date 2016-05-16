@@ -1,14 +1,5 @@
 <ion-view view-title="Review">
-    <ion-content class="padding">
-        <div class="card">
-            <div class="item item-divider bar bar-energized">
-                Review of today
-            </div>
-            <br>
-            <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels" chart-legend="true">
-            </canvas>
-        </div>
-
+    <ion-content class="padding"  ng-init="pieInit()">
         <div class="card">
             <div class="item item-divider bar bar-energized">
                 Review of the last days

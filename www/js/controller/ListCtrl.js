@@ -1,19 +1,13 @@
 app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPopup) {
 
     // catch insert event and reload page
-    $rootScope.$on('insertTaskEvent', function() {
-            //debug
-            //alert('insertTaskEvent');
-            $scope.init();
-    });
-
-    $rootScope.$on('resetDatabase', function() {
+    $rootScope.$on('reset', function() {
             $scope.init();
     });
 
     $scope.init = function() {
-        $scope.collection = [];
-        collection = [];
+        $scope.collectionList = [];
+        collectionList = [];
         if(window.cordova) {
             //alert('lal');
             var query = "SELECT * FROM task ORDER BY idTask DESC";
@@ -21,14 +15,6 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
             $cordovaSQLite.execute(dbApp,query).then(function(result) {
                 //alert('lol');
                 if(result.rows.length > 0) {
-                    /*
-                    for(var i=0; i<result.row.length; i++) {
-                        //collection.push(result.rows[i]);
-                        alert(result.length);
-                    }
-                    //alert(obj.firstname);
-                    */
-                    //alert(result.rows.length);
                     for(var i = 0; i<result.rows.length; i++) {
                         d = new Date(result.rows.item(i).date);
                         day = d.getDate();
@@ -40,27 +26,33 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
                         if(month<10) {
                             month = '0'+month;
                         }
+                        minutes = '';
+                        if(result.rows.item(i).durationMinutes<10) {
+                            minutes += '0' + result.rows.item(i).durationMinutes;
+                        }
+                        else {
+                            minutes = result.rows.item(i).durationMinutes;
+                        }
                         obj = {
                             'idTask': result.rows.item(i).idTask,
                             'categoryName': result.rows.item(i).categoryName,
                             'taskName': result.rows.item(i).taskName,
                             'date': day + '/' + month + '/' + year,
                             'durationHours': result.rows.item(i).durationHours,
-                            'durationMinutes': result.rows.item(i).durationMinutes
+                            'durationMinutes': minutes//result.rows.item(i).durationMinutes
                         };
-                        collection.push(obj);
+                        collectionList.push(obj);
                     }
                 } else {
-                    collection = [];
+                    collectionList = [];
                 }
+                $scope.collectionList = collectionList;
             }, function(error) {
                 alert('error' + error);
             });
-            $scope.collection = collection;
-
         }
         else {
-            $scope.collection = [
+            $scope.collectionList = [
                 {'idTask':1, 'taskName':'name1', 'categoryName': 'category1', 'beginDate':'date1', 'endDate':'date1end'},
                 {'idTask':2, 'taskName':'name2', 'categoryName': 'category2', 'beginDate':'date2', 'endDate':'date1end'},
                 {'idTask':3, 'taskName':'name3', 'categoryName': 'category3', 'beginDate':'date2', 'endDate':'date1end'},
@@ -85,7 +77,8 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
                        title: 'Delete completed',
                        template: 'Item has been deleted'
                    });
-                   $scope.init();
+                   $rootScope.$emit("reset", {});
+                   //$rootScope.$emit("resetPie", {});
                }, function(error) {
                   alert('error' + error.message);
               });
