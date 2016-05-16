@@ -96,7 +96,6 @@ app.controller("TaskCtrl", function($scope, $rootScope,$ionicPopup, $cordovaSQLi
                     okType: 'button button-energized'
                 });
                 $rootScope.$emit("reset", {});
-                //$rootScope.$emit("resetPie", {});
             }, function(error) {
                 alert(error);
             });

@@ -1,6 +1,35 @@
 <ion-view view-title="Settings">
     <ion-content class="padding">
-        <!-- MODIFICATION MODE -->
+        <ion-list ng-init="init()">
+            <div class="card">
+                <div class="item item-divider bar bar-energized">
+                    Statistics
+                </div>
+            </div>
+            <ion-item>
+                <div class="row row-center">
+                    <div class="col"><strong>Category</strong></div>
+                    <div class="col" style="text-align:center;"><strong>Occurences</strong></div>
+                </div>
+            </ion-item>
+            <ion-item ng-repeat="item in collectionSettings">
+                <div class="row row-center">
+                    <div class="col">{{item.categoryName}}</div>
+                    <div class="col"><p style="text-align:center;">{{item.categorySum}}</p></div>
+                </div>
+            </ion-item>
+        </ion-list>
+        <div class="card">
+            <div class="item item-divider bar bar-energized">
+                Danger zone
+            </div>
+        </div>
+        <button class="button button-block button-assertive" ng-click="deleteHistory()">
+            Delete history
+        </button>
+    <!-- SETTINGS USER -->
+    <!--
+
         <form novalidate ng-show="userModifications()" class="simple-form" ng-init="init()">
             <div class="list">
               <label class="item item-input item-stacked-label">
@@ -25,7 +54,7 @@
               </button>
             </div>
         </form>
-        <!-- NO MODIFICATION MODE -->
+
         <div ng-hide="userModifications()" class="list">
           <label class="item item-input item-stacked-label">
             <span class="input-label">First Name</span>
@@ -56,8 +85,6 @@
               Change your informations
           </button>
         </div>
-        <button class="button button-block button-assertive" ng-click="deleteHistory()">
-            Delete history
-        </button>
+    -->
     </ion-content>
 </ion-view>
