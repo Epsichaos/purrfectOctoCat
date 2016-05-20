@@ -25,8 +25,9 @@ Todo
 
 - [ ] Handle form bad inputs
 - [ ] Prevent SQL injections
-- [ ] Chart display and choice
-- [ ] Home page & quick review
+- [x] Chart display and choice
+- [x] Home page & quick review
+- [ ] New date handle in SQLite (in text database column ?)
 
 License
 -------

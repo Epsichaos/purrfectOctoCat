@@ -9,6 +9,15 @@
             </canvas>
         </div>
 
+        <div class="card" ng-init="pieTodayInit()">
+            <div class="item item-divider bar bar-energized">
+                Total review - hours
+            </div>
+            <br>
+            <canvas id="pie" class="chart chart-pie" chart-data="pieDataToday" chart-labels="pieLabelsToday" chart-legend="true">
+            </canvas>
+        </div>
+
         <div class="card" ng-init="lineInit()">
             <div class="item item-divider bar bar-energized">
                 Review of category - hours
