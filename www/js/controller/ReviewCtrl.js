@@ -1,8 +1,11 @@
 app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
 
     $rootScope.$on('reset', function() {
+        /*
             $scope.pieInit();
             $scope.getAlltasks();
+            */
+            $scope.initAll();
             //$scope.categorySelectorValidation('Shopping');
             //$scope.lineInit();
     });
@@ -38,7 +41,7 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                         $scope.pieData.push(Math.round((element.sumHours*60+element.sumMinutes)/6)/10);
                     });
                     // disable animation
-                    // TODO : solve animation bug while using 2 bdd calls :/ 
+                    // TODO : solve animation bug while using 2 bdd calls :/
                     $scope.options = {
                         animation: false
                     };
