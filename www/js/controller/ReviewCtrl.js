@@ -3,9 +3,15 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
     $rootScope.$on('reset', function() {
             $scope.pieInit();
             $scope.getAlltasks();
-            $scope.categorySelectorValidation('Shopping');
+            //$scope.categorySelectorValidation('Shopping');
             //$scope.lineInit();
     });
+
+    $scope.initAll = function() {
+        $scope.pieInit();
+        $scope.getAlltasks();
+        $scope.categorySelectorValidation('Shopping');
+    }
 
     $scope.pieInit = function() {
         collectionReview = [];
@@ -31,6 +37,11 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                         $scope.pieLabels.push(element.categoryName);
                         $scope.pieData.push(Math.round((element.sumHours*60+element.sumMinutes)/6)/10);
                     });
+                    // disable animation
+                    // TODO : solve animation bug while using 2 bdd calls :/ 
+                    $scope.options = {
+                        animation: false
+                    };
                 } else {
                     collectionReview = [];
                 }
@@ -77,15 +88,18 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
         else {
             categoryName = categorySelection.categoryName;
         }
+
         if(window.cordova) {
-            var query = "SELECT date, SUM(durationHours) as sumHours, SUM(durationMinutes) as sumMinutes FROM task WHERE categoryName=? GROUP BY date ORDER BY date DESC";
-            $cordovaSQLite.execute(dbApp,query, [categoryName]).then(function(result) {
+
+            var queryLine = "SELECT date, SUM(durationHours) as sumHours, SUM(durationMinutes) as sumMinutes FROM task WHERE categoryName=? GROUP BY date ORDER BY date DESC";
+            $cordovaSQLite.execute(dbApp,queryLine, [categoryName]).then(function(result) {
                 todayDate = new Date();
                 todayDateDay = todayDate.getDate();
                 todayDateMonth = todayDate.getMonth();
                 todayDateYear = todayDate.getFullYear();
                 todayDateMonth++;
                 if(result.rows.length > 0) {
+
                     for(var i = 0; i<result.rows.length; i++) {
                         d = new Date(result.rows.item(i).date);
                         day = d.getDate();
@@ -120,36 +134,13 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                                 // we do nothing here
                             }
                         }
-/*
-                        else {
-
-                            if(todayDateMonth >= 1) {
-                                // mock month easy peasy
-                                totalDayMonth == 31;
-                                remainingMonthDay;
-                            }
-
-                            // switch(todayDateMonth)
-                            //    case 1:
-
-                            // first complex case, we have to change only month
-                            if(todayDateMonth >=2 && ((day <= todayDateDay && month == todayDateMonth) || (day >= (totalDayMonth-(7-day)) && month == todayDateMonth - 1)) && year == todayDateYear) {
-
-                            }
-                            // most complex case, we have to change both month and year
-                            else if(todayDateMonth == 1 && ((day <= todayDateDay && month == todayDateMonth && year == todayDateYear) || (day >= (totalDayMonth-(7-day)) && month == 12 && year == todayDateYear - 1))) {
-
-                            }
-                            else {
-                                // we do nothing here
-                            }
-                        }*/
                     }
                     $scope.lineCategory=lineCategory;
                 } else {
                     lineCategory = [];
                 }
                 // reset
+                // test
                 $scope.series = [];
                 $scope.lineColors = [];
                 $scope.labels = [];
@@ -208,9 +199,9 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
         }
     }
 
-    /*
+
     $scope.lineInit = function() {
-        //$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
         $scope.series = ['Series A'];
         $scope.data = [
             [65, 59, 80, 81, 56, 55, 40]
@@ -218,5 +209,5 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
         $scope.lineColors = ["#ef473a"];
 
     }
-    */
+
 });

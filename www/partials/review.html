@@ -1,11 +1,11 @@
 <ion-view view-title="Review">
-    <ion-content class="padding">
-        <div class="card" ng-init="pieInit()">
+    <ion-content class="padding" ng-init="initAll()">
+        <div class="card">
             <div class="item item-divider bar bar-energized">
                 Total review - hours
             </div>
             <br>
-            <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels" chart-legend="true">
+            <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels" chart-legend="true" options="options">
             </canvas>
         </div>
 <!--
@@ -19,7 +19,7 @@
         </div>
     -->
         <div class="row row-center center">
-            <div class="col" ng-init="getAlltasks()">
+            <div class="col">
                 <label class="item item-input item-select">
                   <div class="input-label">
                     Category Name
@@ -37,7 +37,7 @@
                 </button>
             </div>
         </div>
-        <div class="card" ng-init="">
+        <div class="card">
             <div class="item item-divider bar bar-energized">
                 Review of category - hours
             </div>
