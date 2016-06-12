@@ -55,8 +55,8 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
     }
 
     $scope.getAlltasks = function() {
-        $scope.categoryCollection = [];
-        categoryCollection = [];
+        $scope.allCategoryCollection = [];
+        allCategoryCollection = [];
         // if the device is an Android device
         if(window.cordova) {
             var query = "SELECT DISTINCT categoryName FROM task";
@@ -66,15 +66,15 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                         obj = {
                             'categoryName': result.rows.item(i).categoryName,
                         };
-                        categoryCollection.push(obj);
+                        allCategoryCollection.push(obj);
                     }
                 } else {
-                    categoryCollection = [];
+                    allCategoryCollection = [];
                 }
             }, function(error) {
                 alert('error' + error);
             });
-            $scope.categoryCollection = categoryCollection;
+            $scope.allCategoryCollection = allCategoryCollection;
         }
     }
 
@@ -127,6 +127,9 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                         if(todayDateDay >= 7) {
                             if(day <= todayDateDay && day >= todayDateDay-6 && month == todayDateMonth && year == todayDateYear) {
                                 obj = {
+                                    'day': parsedDay,
+                                    'month': parsedMonth,
+                                    'year': year,
                                     'date': parsedDay + '/' + parsedMonth + '/' + year,
                                     'sumHours': result.rows.item(i).sumHours,
                                     'sumMinutes': result.rows.item(i).sumMinutes
@@ -151,9 +154,22 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                 // set new
                 $scope.series = [categoryName];
                 $scope.lineColors = ["#ef473a"];
+                $scope.labels = [
+                    todayDateDay-6+'/'+month+'/'+year,
+                    todayDateDay-5+'/'+month+'/'+year,
+                    todayDateDay-4+'/'+month+'/'+year,
+                    todayDateDay-3+'/'+month+'/'+year,
+                    todayDateDay-2+'/'+month+'/'+year,
+                    todayDateDay-1+'/'+month+'/'+year,
+                    todayDateDay+'/'+month+'/'+year
+                ];
+                $scope.data[0] = [0, 0, 0, 0, 0, 0, 0];
                 lineCategory.forEach(function(element) {
-                    $scope.labels.push(element.date);
-                    $scope.data[0].push(Math.round((element.sumHours*60+element.sumMinutes)/6)/10);
+                    // 0 .. 6
+                    //$scope.labels[6-todayDateDay+element.day] = element.date;
+                    $scope.data[0][6-parseInt(todayDateDay)+parseInt(element.day)] = (Math.round((element.sumHours*60+element.sumMinutes)/6)/10);
+                    //$scope.labels.push(element.date);
+                    //$scope.data[0].push(Math.round((element.sumHours*60+element.sumMinutes)/6)/10);
                 });
             }, function(error) {
                 alert('error :' + error.message);
@@ -202,7 +218,9 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
         }
     }
 
-
+    /**
+    * @deprecated
+    */
     $scope.lineInit = function() {
         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
         $scope.series = ['Series A'];
