@@ -20,6 +20,8 @@ app.controller("ListCtrl", function($scope, $rootScope, $cordovaSQLite, $ionicPo
                         day = d.getDate();
                         month = d.getMonth();
                         year = d.getFullYear();
+                        // getMonth() return 0 for January, 1 for February, etc
+                        month++;
                         if(day<10) {
                             day = '0'+day;
                         }

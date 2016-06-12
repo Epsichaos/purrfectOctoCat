@@ -8,7 +8,7 @@
             <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels" chart-legend="true">
             </canvas>
         </div>
-
+<!--
         <div class="card" ng-init="pieTodayInit()">
             <div class="item item-divider bar bar-energized">
                 Total review - hours
@@ -17,8 +17,27 @@
             <canvas id="pie" class="chart chart-pie" chart-data="pieDataToday" chart-labels="pieLabelsToday" chart-legend="true">
             </canvas>
         </div>
-
-        <div class="card" ng-init="lineInit()">
+    -->
+        <div class="row row-center center">
+            <div class="col" ng-init="getAlltasks()">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    Category Name
+                  </div>
+                  <select ng-model="categorySelection.categoryName">
+                      <option ng-repeat="item in categoryCollection">{{item.categoryName}}</option>
+                  </select>
+                </label>
+            </div>
+        </div>
+        <div class="row row-center center">
+            <div class="col">
+                <button class="button button-energized" type="submit" ng-click="categorySelectorValidation(categorySelection)">
+                    Display task history
+                </button>
+            </div>
+        </div>
+        <div class="card" ng-init="">
             <div class="item item-divider bar bar-energized">
                 Review of category - hours
             </div>
@@ -28,6 +47,7 @@
               chart-click="onClick" chart-colours="lineColors">
             </canvas>
         </div>
+
 <!--
         <div class="card">
             <div class="item item-divider">
