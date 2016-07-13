@@ -102,7 +102,6 @@ app.controller("ReviewCtrl", function($scope, $rootScope, $cordovaSQLite) {
                 todayDateYear = todayDate.getFullYear();
                 todayDateMonth++;
                 if(result.rows.length > 0) {
-
                     for(var i = 0; i<result.rows.length; i++) {
                         d = new Date(result.rows.item(i).date);
                         day = d.getDate();
