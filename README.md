@@ -29,6 +29,12 @@ Todo
 - [x] Home page & quick review
 - [ ] New date handle in SQLite (in text database column ?)
 
+
+Travis - CI
+-----------
+
+Check out .travis.yml config file
+
 License
 -------
 
