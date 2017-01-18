@@ -1,4 +1,4 @@
-purrfectOctoCat
+purrfectOctoCat !["travis_build_status"](https://travis-ci.org/Epsichaos/purrfectOctoCat.svg?branch=master)
 ===============
 
 Description
